@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUSHI & POKE EL MOLINO | Experiencia Japonesa</title>
+    <meta name="description" content="El mejor sushi y poke de la ciudad. Ingredientes frescos, ambiente exclusivo. Reserva tu mesa o pide a domicilio.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;     /* Negro casi puro */
+            --bg-card: #141414;     /* Gris muy oscuro para tarjetas */
+            --gold: #D4AF37;        /* Dorado Clásico */
+            --gold-light: #F4DF8D;  /* Dorado Brillo */
+            --white: #ffffff;
+            --text-gray: #b3b3b3;   /* Gris suave para textos largos */
+        }
+
+        /* RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Lato', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: var(--white); 
+            padding-bottom: 80px; /* Hueco para el footer fijo */
+            overflow-x: hidden;   /* Evita scroll horizontal */
+        }
+
+        h1, h2, h3, .brand { font-family: 'Playfair Display', serif; }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            position: absolute; top: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 10; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        
+        .brand { 
+            font-size: 1.2rem; font-weight: 700; color: var(--gold); 
+            letter-spacing: 1px; text-transform: uppercase; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .nav-btn {
+            border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px;
+            text-decoration: none; text-transform: uppercase; font-size: 0.75rem; 
+            letter-spacing: 1px; transition: 0.3s; background: rgba(0,0,0,0.5);
+            white-space: nowrap; /* Evita que el botón se rompa */
+        }
+
+        /* --- HERO (PORTADA) --- */
+        .hero {
+            height: 90vh; /* Pantalla casi completa */
+            /* IMAGEN DE FONDO DE ALTA CALIDAD (SUSHI OSCURO) */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1611143669185-af224c5e3252?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
+        }
+
+        .hero p.subtitle { 
+            font-size: 1rem; color: var(--gold-light); font-weight: 300; 
+            letter-spacing: 3px; margin-bottom: 10px; text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem; line-height: 1.1; margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+        }
+        
+        .cta-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; width: 100%; }
+        
+        .btn-primary {
+            background: var(--gold); color: black; padding: 15px 30px; text-decoration: none;
+            font-weight: 700; text-transform: uppercase; border: none; 
+            letter-spacing: 1px; box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+            min-width: 160px; text-align: center;
+        }
+        .btn-outline {
+            border: 1px solid var(--white); color: var(--white); padding: 15px 30px; text-decoration: none;
+            font-weight: 700; text-transform: uppercase; background: rgba(0,0,0,0.4);
+            min-width: 160px; text-align: center;
+        }
+
+        /* --- CARTA / PLATOS --- */
+        .section { padding: 60px 20px; }
+        .section-title { text-align: center; font-size: 2.2rem; color: var(--gold); margin-bottom: 5px; }
+        .section-subtitle { text-align: center; color: var(--text-gray); margin-bottom: 40px; font-style: italic; }
+
+        .menu-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; max-width: 1100px; margin: 0 auto;
+        }
+
+        .dish-card {
+            background: var(--bg-card); border-radius: 4px; overflow: hidden; 
+            position: relative; transition: transform 0.3s; border: 1px solid #222;
+        }
+        /* Zoom suave al pasar el ratón */
+        .dish-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        
+        .dish-img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        
+        .dish-info { padding: 25px; }
+        .dish-header { display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center; }
+        .dish-name { font-size: 1.3rem; color: var(--white); font-weight: 700; }
+        .dish-price { color: var(--gold); font-weight: 700; font-size: 1.2rem; font-family: 'Lato', sans-serif; }
+        .dish-desc { font-size: 0.9rem; color: var(--text-gray); line-height: 1.6; }
+
+        /* --- EXPERIENCIA (TEXTO) --- */
+        .reservation-section {
+            background: #111; border-top: 1px solid #333; border-bottom: 1px solid #333;
+            text-align: center; padding: 80px 20px;
+        }
+
+        /* --- FOOTER APP (BARRA FIJA) --- */
+        .sticky-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(8px);
+            display: flex; border-top: 1px solid #333; z-index: 1000;
+        }
+        .footer-btn {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-decoration: none; color: #888; font-size: 0.7rem; letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .footer-btn span { font-size: 1.4rem; margin-bottom: 4px; }
+        .footer-btn.highlight {
+            background: var(--gold); color: black; font-weight: 900; 
+            margin: 10px; border-radius: 4px; font-size: 0.8rem; flex: 1.6; 
+            text-transform: uppercase; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            flex-direction: row; gap: 8px; /* Icono y texto al lado */
+        }
+        .footer-btn.highlight span { margin-bottom: 0; font-size: 1rem; }
+
+        /* --- MEDIA QUERIES (ARREGLO PARA MÓVIL PEQUEÑO) --- */
+        @media(max-width: 768px) {
+            nav { flex-direction: row; padding: 15px 5%; }
+            .brand { font-size: 1rem; max-width: 60%; line-height: 1.2; } /* Texto más pequeño si es largo */
+            .hero h1 { font-size: 2.5rem; }
+            .cta-group { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-outline { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">SUSHI & POKE<br>EL MOLINO</div>
+        <a href="https://wa.me/34600000000" class="nav-btn">RESERVAR MESA</a>
+    </nav>
+
+    <header class="hero">
+        <p class="subtitle">EXPERIENCIA JAPONESA</p>
+        <h1>SABOR,<br>ARTE Y FUEGO</h1>
+        <div class="cta-group">
+            <a href="#menu" class="btn-primary">VER LA CARTA</a>
+            <a href="tel:+34600000000" class="btn-outline">PEDIR AHORA</a>
+        </div>
+    </header>
+
+    <section id="menu" class="section">
+        <h2 class="section-title">La Carta</h2>
+        <p class="section-subtitle">Fusión de tradición y vanguardia</p>
+
+        <div class="menu-grid">
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop" class="dish-img" alt="Poke Bowl">                <div class="dish-info">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Dragon Roll</h3>
+                        <span class="dish-price">14€</span>
+                    </div>
+                    <p class="dish-desc">Langostino en tempura, cubierto de aguacate, huevas de salmón y salsa de anguila kabayaki.</p>
+                </div>
+            </div>
+
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?q=80&amp;w=800&amp;auto=format&amp;fit=crop" class="dish-img" alt="Nigiri Toro">                <div class="dish-info">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Nigiri Toro</h3>
+                        <span class="dish-price">8€</span>
+                    </div>
+                    <p class="dish-desc">Ventresca de atún rojo del Mediterráneo, corte grueso, con un toque de soplete y sal Maldon.</p>
+                </div>
+            </div>
+
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&amp;w=800&amp;auto=format&amp;fit=crop" class="dish-img" alt="Sushi Roll">                <div class="dish-info">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Poke Molino</h3>
+                        <span class="dish-price">12€</span>
+                    </div>
+                    <p class="dish-desc">Base de arroz sushi, salmón fresco marinado, mango, edamame, aguacate y salsa ponzu cítrica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reservation-section">
+        <h2 class="section-title" style="color:var(--white); font-size:1.8rem;">Cocina de Autor</h2>
+        <p style="color:var(--text-gray); max-width: 600px; margin: 0 auto 30px auto; font-size: 1rem; line-height: 1.8;">
+            En <strong>El Molino</strong>, cada pieza de sushi es una obra de arte. Utilizamos pescado de lonja seleccionado diariamente para garantizar una frescura inigualable.
+        </p>
+        <p style="color:var(--gold); font-size: 1.2rem;">⭐⭐⭐⭐⭐</p>
+    </section>
+
+    <div class="sticky-footer">
+        <a href="#menu" class="footer-btn">
+            <span>🍣</span>
+            CARTA
+        </a>
+        <a href="https://wa.me/34600000000?text=Hola,%20quiero%20reservar%20mesa%20en%20El%20Molino" class="footer-btn highlight">
+            <span>📅</span> RESERVAR
+        </a>
+        <a href="tel:+34600000000" class="footer-btn">
+            <span>📞</span>
+            LLAMAR
+        </a>
+    </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Sushi & Poke El Molino",
+      "image": "https://images.unsplash.com/photo-1611143669185-af224c5e3252",
+      "priceRange": "€€-€€€",
+      "servesCuisine": ["Japanese", "Sushi", "Poke"],
+      "telephone": "+34600000000"
+    }
+    </script>
+</body>
+</html>
